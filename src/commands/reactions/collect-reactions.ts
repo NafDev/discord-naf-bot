@@ -73,7 +73,7 @@ async function collectReactions(message: Message): Promise<void> {
     .bulkWrite(
       models.map((model) => ({
         updateOne: {
-          filter: { server: model.serverId, user: model.userId, emoji: model.emojiId },
+          filter: { serverId: model.serverId, userId: model.userId, emojiId: model.emojiId },
           update: { $set: model },
           upsert: true,
         },

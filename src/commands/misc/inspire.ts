@@ -6,7 +6,7 @@ import Command from '../command-interface';
 export const InspirationQuote: Command = {
   name: 'inspire',
   aliases: ['jj', 'quote'],
-  description: null,
+  description: 'AI-generated inspirational quotes',
   help: null,
   hidden: false,
   admin: false,

@@ -6,7 +6,7 @@ export const CustomRole: Command = {
   name: 'giverole',
   aliases: null,
   description: 'Give yourself a role and colour',
-  help: '`giverole Role Name, #hexcolour`, `giverole <@existing role>',
+  help: 'giverole `Role Name`, `#hexcolour`,\ngiverole `<@existing role>`',
   hidden: false,
   admin: false,
   function: run,
