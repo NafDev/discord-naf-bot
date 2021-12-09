@@ -33,7 +33,8 @@ async function run(message: Message): Promise<void> {
     .catch((err) => logger.warn(err));
 
   const role = await message.guild.roles.fetch(roleToRemove.id);
-  if (role.members.size === 0) {
+
+  if ((role.members.size === 1 && role.members.first().id === message.author.id) || role.members.size === 0) {
     role.delete().catch((err) => logger.warn(err));
   }
 }
