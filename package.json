@@ -1,0 +1,50 @@
+{
+  "name": "discord-naf-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.ts",
+  "engines": {
+    "node": ">=16.6"
+  },
+  "scripts": {
+    "start": "npm run nodemon",
+    "nodemon": "nodemon --config nodemon.json",
+    "build": "rimraf dist && tsc",
+    "serve": "pm2 start pm2.config.js --name naf-bot --env production",
+    "destroy": "pm2 stop naf-bot && pm2 delete naf-bot",
+    "tail": "pm2 logs naf-bot",
+    "lint": "eslint \"src/**\""
+  },
+  "author": "NafDev",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/lodash.has": "^4.5.6",
+    "@types/lodash.set": "^4.3.6",
+    "@types/node": "^16.4.1",
+    "@types/object-hash": "^2.1.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "8.3.0",
+    "nodemon": "^2.0.12",
+    "prettier": "2.3.2",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@typegoose/typegoose": "^8.2.0",
+    "axios": "^0.24.0",
+    "canvas": "^2.8.0",
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0",
+    "glob": "^7.1.7",
+    "lodash.has": "^4.5.2",
+    "lodash.set": "^4.3.2",
+    "mongoose": "^5.13.3",
+    "object-hash": "^2.2.0",
+    "rimraf": "^3.0.2",
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.7"
+  }
+}
