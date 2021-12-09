@@ -20,7 +20,7 @@ async function run(message: Message): Promise<void> {
   let roleName: string;
   const hexColour = extractString(hexRegex, cmdString);
   if (hexColour) {
-    cmdString = cmdString.replace(cmdString, '').trim();
+    cmdString = cmdString.replace(hexColour, '').trim();
   }
 
   if (cmdString.lastIndexOf(',') === cmdString.length - 1) {
