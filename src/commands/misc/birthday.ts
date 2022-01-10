@@ -21,7 +21,7 @@ async function run(message: Message): Promise<Message> {
   } else {
     birthday = dayjs(message.content, 'DD/MM/YYYY', true);
 
-    if (!birthday.isValid() || !birthday.isAfter(new Date())) {
+    if (!birthday.isValid() || !birthday.isBefore(new Date())) {
       return message.reply('Invalid date');
     }
   }
