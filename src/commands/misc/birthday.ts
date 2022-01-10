@@ -16,9 +16,9 @@ async function run(message: Message): Promise<Message> {
     deleteBirthday = true;
   }
 
-  if (deleteBirthday || !commandFormat.test(message.content)) {
+  if (!commandFormat.test(message.content)) {
     return message.reply('Invalid command format. Correct format: `DD/MM/YYYY`');
-  } else {
+  } else if (!deleteBirthday) {
     birthday = dayjs(message.content, 'DD/MM/YYYY', true);
 
     if (!birthday.isValid() || !birthday.isBefore(new Date())) {
