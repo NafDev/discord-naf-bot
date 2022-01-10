@@ -14,15 +14,15 @@ async function run(message: Message): Promise<Message> {
 
   if (message.content.trim() === '') {
     deleteBirthday = true;
-  }
-
-  if (!deleteBirthday && !commandFormat.test(message.content)) {
-    return message.reply('Invalid command format. Correct format: `DD/MM/YYYY`');
   } else {
-    birthday = dayjs(message.content, 'DD/MM/YYYY', true);
+    if (!commandFormat.test(message.content)) {
+      return message.reply('Invalid command format. Correct format: `DD/MM/YYYY`');
+    } else {
+      birthday = dayjs(message.content, 'DD/MM/YYYY', true);
 
-    if (!birthday.isValid() || !birthday.isBefore(new Date())) {
-      return message.reply('Invalid date');
+      if (!birthday.isValid() || !birthday.isBefore(new Date())) {
+        return message.reply('Invalid date');
+      }
     }
   }
 
