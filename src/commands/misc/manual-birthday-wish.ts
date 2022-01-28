@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
+import { birthdaysCb } from '../../events/birthday-wishes';
 import Command from '../command-interface';
-import { event } from '../../events/birthday-wishes';
 
 export const ManualBirthdayWish: Command = {
   name: 'wishbirthdays',
@@ -13,5 +13,5 @@ export const ManualBirthdayWish: Command = {
 };
 
 async function run(message: Message): Promise<void> {
-  event.function(message.client);
+  birthdaysCb(message.client);
 }

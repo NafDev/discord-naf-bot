@@ -11,31 +11,33 @@ export const event: BotEvent = {
 };
 
 async function run(client: Client): Promise<void> {
-  scheduleJob('00 12 * * *', async () => {
-    const todaySearch = new RegExp('^\\d{4}-' + new Date().toISOString().slice(5, 10)).source;
+  scheduleJob('00 12 * * *', () => birthdaysCb(client));
+}
 
-    const birthdayModels = await BirthdayModel.find({ date: { $regex: todaySearch as undefined } });
+export async function birthdaysCb(client: Client): Promise<void> {
+  const todaySearch = new RegExp('^\\d{4}-' + new Date().toISOString().slice(5, 10)).source;
 
-    for (const model of birthdayModels) {
-      const server = await client.guilds.fetch(model.serverId);
-      const user = await server.members.fetch(model.userId);
-      if (!server || !user) {
-        logger.warn(`Couldn't find server/user for birthday. Server "${model.serverId}", User "${model.userId}"`);
-        return;
-      }
+  const birthdayModels = await BirthdayModel.find({ date: { $regex: todaySearch as undefined } });
 
-      const channel = server.channels.cache.find((channel) => channel.name.includes('general') && channel.isText());
-
-      if (!channel || !channel.isText()) {
-        logger.warn(`Couldn't find general text channel for guild: ${server.name}`);
-        return;
-      }
-
-      const years = Math.floor(dayjs().diff(model.date, 'year'));
-
-      return channel.send(`Happy ${ordinal_suffix_of(years)} birthday ${user}!`);
+  for (const model of birthdayModels) {
+    const server = await client.guilds.fetch(model.serverId);
+    const user = await server.members.fetch(model.userId);
+    if (!server || !user) {
+      logger.warn(`Couldn't find server/user for birthday. Server "${model.serverId}", User "${model.userId}"`);
+      return;
     }
-  });
+
+    const channel = server.channels.cache.find((channel) => channel.name.includes('general') && channel.isText());
+
+    if (!channel || !channel.isText()) {
+      logger.warn(`Couldn't find general text channel for guild: ${server.name}`);
+      return;
+    }
+
+    const years = Math.floor(dayjs().diff(model.date, 'year'));
+
+    channel.send(`Happy ${ordinal_suffix_of(years)} birthday ${user}!`);
+  }
 }
 
 function ordinal_suffix_of(i) {
