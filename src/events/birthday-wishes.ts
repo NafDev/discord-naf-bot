@@ -17,9 +17,9 @@ async function run(client: Client): Promise<void> {
 export async function birthdaysCb(client: Client): Promise<void> {
   const todaySearch = new RegExp('^\\d{4}-' + new Date().toISOString().slice(5, 10)).source;
 
-  const birthdayModels = await BirthdayModel.find({ date: { $regex: todaySearch as undefined } });
+  const birthdayModels = await BirthdayModel.find();
 
-  for (const model of birthdayModels) {
+  for (const model of birthdayModels.filter((doc) => doc.date.toISOString().match(todaySearch))) {
     const server = await client.guilds.fetch(model.serverId);
     const user = await server.members.fetch(model.userId);
     if (!server || !user) {
