@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import utc from 'dayjs/plugin/utc';
 import { Message } from 'discord.js';
 import { BirthdayModel } from '../../db/models/birthday.schema';
 import Command from '../command-interface';
 
 dayjs.extend(customParseFormat);
+dayjs.extend(utc);
 
 const commandFormat = /^\d{2}\/\d{2}\/\d{4}$/;
 
@@ -12,18 +14,18 @@ async function run(message: Message): Promise<Message> {
   let birthday: dayjs.Dayjs;
   let deleteBirthday = false;
 
-  if (message.content.trim() === '') {
-    deleteBirthday = true;
-  } else {
-    if (!commandFormat.test(message.content)) {
+  switch (true) {
+    case message.content.trim() === '':
+      deleteBirthday = true;
+      break;
+    case commandFormat.test(message.content) === false:
       return message.reply('Invalid command format. Correct format: `DD/MM/YYYY`');
-    } else {
-      birthday = dayjs(message.content, 'DD/MM/YYYY', true);
+    default:
+      birthday = dayjs.utc(message.content, 'DD/MM/YYYY', true);
 
       if (!birthday.isValid() || !birthday.isBefore(new Date())) {
         return message.reply('Invalid date');
       }
-    }
   }
 
   let birthdayEntity = await BirthdayModel.findOne({ serverId: message.guildId, userId: message.author.id }).exec();
