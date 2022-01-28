@@ -3,7 +3,7 @@ import Command from '../command-interface';
 import { event } from '../../events/birthday-wishes';
 
 export const ManualBirthdayWish: Command = {
-  name: 'birthdaynow',
+  name: 'wishbirthdays',
   aliases: null,
   description: null,
   help: null,
