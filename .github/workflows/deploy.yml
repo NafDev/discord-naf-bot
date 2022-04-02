@@ -26,9 +26,5 @@ jobs:
       - name: Prune build deps
         run: npm prune --production
       
-      - name: Destroy previous deployment
-        run: npm run destroy
-        continue-on-error: true
-      
       - name: Deploy
         run: npm run serve
