@@ -10,8 +10,7 @@
     "start": "npm run nodemon",
     "nodemon": "nodemon --config nodemon.json",
     "build": "rimraf dist && tsc",
-    "serve": "pm2 start pm2.config.js --name naf-bot --env production",
-    "destroy": "pm2 stop naf-bot && pm2 delete naf-bot",
+    "serve": "pm2 startOrRestart pm2.config.js --name naf-bot --env production",
     "tail": "pm2 logs naf-bot",
     "lint": "eslint \"src/**\""
   },
