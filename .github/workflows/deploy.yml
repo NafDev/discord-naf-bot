@@ -17,8 +17,8 @@ jobs:
         with:
           node-version: '16.6'
       
-      - name: Install build deps
-        run: npm i
+      - name: Install build deps/pm2
+        run: npm i && npm i pm2
         
       - name: Build
         run: npm run build
