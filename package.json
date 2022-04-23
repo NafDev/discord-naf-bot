@@ -36,7 +36,6 @@
     "@typegoose/typegoose": "^8.2.0",
     "axios": "^0.24.0",
     "canvas": "^2.8.0",
-    "cheerio": "^1.0.0-rc.10",
     "dayjs": "^1.10.7",
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
@@ -46,6 +45,7 @@
     "mongoose": "^5.13.3",
     "node-schedule": "^2.1.0",
     "object-hash": "^2.2.0",
+    "puppeteer": "^13.6.0",
     "rimraf": "^3.0.2",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
