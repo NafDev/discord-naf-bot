@@ -26,7 +26,7 @@ async function run(client: Client): Promise<void> {
             throw new Error('videoSrc is null or undefined');
           }
         } catch (error) {
-          logger.error('Failed to scrape TikTok video source');
+          logger.error('Failed to scrape TikTok video source', error);
           return;
         }
 
